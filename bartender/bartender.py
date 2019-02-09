@@ -31,5 +31,10 @@ class Bartender:
 
 
 
+# Adding dead code to see change in coverage report
+if (True):
+	print("here")
+else:
+	print("should not get here")
 
 app = Bartender()
