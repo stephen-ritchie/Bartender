@@ -1,0 +1,19 @@
+{
+	"BourbonAndCoke": {
+		"name": "Bourbon and Coke",
+		"description" : "placeholder description",
+		"ingredients": {
+			"bourbon": 10,
+			"coke": 10
+		}
+	},
+	
+	"GinAndTonic": {
+		"name": "Gin and Tonic",
+		"description" : "placeholder description",
+		"ingredients": {
+			"gin": 10,
+			"tonic": 10
+		}
+	}
+}
