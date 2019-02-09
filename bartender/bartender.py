@@ -22,7 +22,7 @@ class Bartender:
 		
 
 	def load_drink_list(self):
-		filename = "drinklist.json"
+		filename = "bartender/drinklist.json"
 		with open(filename) as f:
 			data = json.load(f)
 		pprint(data)
