@@ -17,6 +17,10 @@ import logging
 from pprint import pprint
 import time
 
+import RPi.GPIO as GPIO
+
+
+GPIO.setmode(GPIO.BCM)
 FLOW_RATE = 60
 
 
@@ -28,12 +32,15 @@ class Bartender:
 		self.drink_list = self._load_drink_list()
 		self.pump_config = self._load_pump_config()
 
+		for pump in self.pump_config.keys():
+			GPIO.setup(self.pump_configuration[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
+
 		
 	def _load_drink_list(self):
 		"""
 		"""
 
-		filename = "/Users/Stephen/projects/Bartender/bartender/drinklist.json"
+		filename = "drinklist.json"
 		with open(filename) as f:
 			data = json.load(f)
 		return data
@@ -43,7 +50,7 @@ class Bartender:
 		"""
 		"""
 
-		filename = "/Users/Stephen/projects/Bartender/bartender/pump_config.json"
+		filename = "pump_config.json"
 		with open(filename) as f:
 			data = json.load(f)
 		return data
@@ -105,7 +112,9 @@ class Bartender:
 		"""
 
 		logger.debug("Pin %s (%s) being activated for %s second(s)" % (pin, ingredient, wait_time))
+		GPIO.output(pin, GPIO.LOW)
 		time.sleep(wait_time)
+		GPIO.output(pin, GPIO.HIGH)
 
 
 	def make_drink(self, drink_name):
