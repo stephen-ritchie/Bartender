@@ -135,7 +135,7 @@ class Bartender:
 
 if __name__ == "__main__":
 
-	logging.basicConfig(filename='../run.log',level=logging.DEBUG)
+	logging.basicConfig(filename='../run.log', level=logging.DEBUG)
 	logger = logging.getLogger(__name__)
 
 	import argparse
@@ -146,4 +146,6 @@ if __name__ == "__main__":
 
 	if args['drink'] is not None:
 		bartender = Bartender()
-		bartender.make_drink(" ".join(args['drink']))
+		drinkname = " ".join(args['drink'])
+		print("Pouring a %s" % drinkname)
+		bartender.make_drink(drinkname)

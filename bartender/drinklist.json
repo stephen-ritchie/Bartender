@@ -20,5 +20,12 @@
 		"ingredients": {
 			"bourbon": 44.3603
 		}
+	},
+	"Test": {
+		"name": "Test Drink",
+		"description" : "placeholder description",
+		"ingredients": {
+			"bourbon": 10
+		}
 	}
 }
