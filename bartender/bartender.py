@@ -1,27 +1,11 @@
-
-
-# Functions I need to make
-# Public
-# make_drink(name)
-# clean()
-#
-# Private
-# load_drink_list()
-# load_pump_config()
-# record_drink(name, person?)
-#
-# pour(pin, time)
+#!/venv/bin/python
 
 import json
 import logging
-from pprint import pprint
 import time
 import RPi.GPIO as GPIO
 
-
-GPIO.setmode(GPIO.BCM)
 FLOW_RATE = 1.27
-
 
 class Bartender:
 	"""
@@ -31,10 +15,12 @@ class Bartender:
 		self.drink_list = self._load_drink_list()
 		self.pump_config = self._load_pump_config()
 
+		# Configure GPIO
+		GPIO.setmode(GPIO.BCM)
+		GPIO.setwarnings(False)
 		for pump in self.pump_config.keys():
 			GPIO.setup(self.pump_config[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
 
-		
 	def _load_drink_list(self):
 		"""
 		"""
@@ -42,8 +28,8 @@ class Bartender:
 		filename = "drinklist.json"
 		with open(filename) as f:
 			data = json.load(f)
-		return data
 
+		return data
 
 	def _load_pump_config(self):
 		"""
@@ -52,8 +38,8 @@ class Bartender:
 		filename = "pump_config.json"
 		with open(filename) as f:
 			data = json.load(f)
-		return data
 
+		return data
 
 	def _get_ingredients(self, drink):
 		"""Gets ingredients for the provided drink.
@@ -69,7 +55,6 @@ class Bartender:
 		except:
 			logger.error("Could not find ingredients for:%s" % drink)
 			return None
-
 
 	def _mililiters_to_seconds(self, amount):
 		"""Convert from mililiters to seconds based on pump flow rate.
@@ -98,7 +83,6 @@ class Bartender:
 
 		return pin
 
-
 	def _pour(self, wait_time, pin, ingredient=None):
 		"""Uses GPIO to activate provided pin on Raspberry Pi.
 
@@ -114,7 +98,6 @@ class Bartender:
 		GPIO.output(pin, GPIO.LOW)
 		time.sleep(wait_time)
 		GPIO.output(pin, GPIO.HIGH)
-
 
 	def make_drink(self, drink_name):
 		"""
@@ -148,5 +131,5 @@ if __name__ == "__main__":
 	logger = logging.getLogger(__name__)
 
 	bartender = Bartender()
-	bartender.make_drink("BourbonAndCoke")
+	bartender.make_drink("BourbonShot")
 

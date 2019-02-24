@@ -1,17 +1,24 @@
 {
-	"BourbonAndCoke": {
+	"JackAndCoke": {
 		"name": "Bourbon and Coke",
 		"description" : "placeholder description",
 		"ingredients": {
-			"bourbon": 50
+			"bourbon": 59.1471,
+			"diet_coke": 295.735
 		}
 	},
-	"GinAndTonic": {
-		"name": "Gin and Tonic",
+	"BourbonNeat": {
+		"name": "Bourbon (Neat)",
 		"description" : "placeholder description",
 		"ingredients": {
-			"gin": 10,
-			"tonic": 10
+			"bourbon": 59.1471
+		}
+	},
+	"BourbonShot": {
+		"name": "Bourbon (Shot)",
+		"description" : "placeholder description",
+		"ingredients": {
+			"bourbon": 44.3603
 		}
 	}
 }
