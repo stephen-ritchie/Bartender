@@ -138,22 +138,12 @@ if __name__ == "__main__":
 	logging.basicConfig(filename='../run.log',level=logging.DEBUG)
 	logger = logging.getLogger(__name__)
 
-	try:
-		import argparse
-		parser = argparse.ArgumentParser()
-		parser.add_argument("-drink", help="drink to make", nargs=1)
-		args = parser.parse_args()
-		args = vars(args)
+	import argparse
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-drink", help="drink to make", nargs=1)
+	args = parser.parse_args()
+	args = vars(args)
 
-		if args['drink'] is not None:
-			bartender = Bartender()
-			bartender.make_drink(" ".join(args['drink']))
-
-	except:
-		print("Could not import argparse")
-
-	
-
-	
-	
-
+	if args['drink'] is not None:
+		bartender = Bartender()
+		artender.make_drink(" ".join(args['drink']))
