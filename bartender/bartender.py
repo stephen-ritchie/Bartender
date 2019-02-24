@@ -146,4 +146,4 @@ if __name__ == "__main__":
 
 	if args['drink'] is not None:
 		bartender = Bartender()
-		artender.make_drink(" ".join(args['drink']))
+		bartender.make_drink(" ".join(args['drink']))
