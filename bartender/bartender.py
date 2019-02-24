@@ -32,7 +32,7 @@ class Bartender:
 		self.pump_config = self._load_pump_config()
 
 		for pump in self.pump_config.keys():
-			GPIO.setup(self.pump_configuration[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
+			GPIO.setup(self.pump_config[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
 
 		
 	def _load_drink_list(self):
