@@ -12,6 +12,9 @@ class Bartender:
 	"""
 
 	def __init__(self):
+		"""Configures bartender.
+		"""
+
 		self.drink_list = self._load_drink_list()
 		self.pump_config = self._load_pump_config()
 
@@ -19,7 +22,10 @@ class Bartender:
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setwarnings(False)
 		for pump in self.pump_config.keys():
-			GPIO.setup(self.pump_config[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
+			try:
+				GPIO.setup(self.pump_config[pump]["pin"], GPIO.OUT, initial=GPIO.HIGH)
+			except:
+				logging.getLogger(__name__).error('Could not perform GPIO setup on %s' % pump)
 
 	def _load_drink_list(self):
 		"""
@@ -46,6 +52,7 @@ class Bartender:
 
 		Args:
 			drink: Name of drink
+
 		Returns:
 			Ingredients and their amounts (mL) as JSON object.
 		"""
@@ -61,6 +68,7 @@ class Bartender:
 
 		Args:
 			amount:
+
 		Returns:
 			Number of seconds to achieve amount at configured flow rate
 		"""
@@ -72,6 +80,7 @@ class Bartender:
 
 		Args:
 			ingredient: item to find associated pin for in config
+
 		Returns:
 			The pin number - None if the pin cannot be found
 		"""
@@ -90,8 +99,6 @@ class Bartender:
 			wait_time: time in seconds
 			pin: pin number on raspberry pi
 			ingredient (optional): provides extra debugging info to log
-		Returns:
-			None
 		"""
 
 		logger.debug("Pin %s (%s) being activated for %s second(s)" % (pin, ingredient, wait_time))
@@ -127,9 +134,26 @@ class Bartender:
 
 
 if __name__ == "__main__":
+
 	logging.basicConfig(filename='../run.log',level=logging.DEBUG)
 	logger = logging.getLogger(__name__)
 
-	bartender = Bartender()
-	bartender.make_drink("BourbonShot")
+	try:
+		import argparse
+		parser = argparse.ArgumentParser()
+		parser.add_argument("-drink", help="drink to make", nargs=1)
+		args = parser.parse_args()
+		args = vars(args)
+
+		if args['drink'] is not None:
+			bartender = Bartender()
+			bartender.make_drink(" ".join(args['drink']))
+
+	except:
+		print("Could not import argparse")
+
+	
+
+	
+	
 
