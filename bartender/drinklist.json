@@ -3,8 +3,7 @@
 		"name": "Bourbon and Coke",
 		"description" : "placeholder description",
 		"ingredients": {
-			"bourbon": 10,
-			"coke": 10
+			"bourbon": 50,
 		}
 	},
 	"GinAndTonic": {

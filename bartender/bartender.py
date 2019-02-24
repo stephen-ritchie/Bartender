@@ -16,12 +16,11 @@ import json
 import logging
 from pprint import pprint
 import time
-
 import RPi.GPIO as GPIO
 
 
 GPIO.setmode(GPIO.BCM)
-FLOW_RATE = 60
+FLOW_RATE = 1.27
 
 
 class Bartender:
@@ -81,7 +80,7 @@ class Bartender:
 			Number of seconds to achieve amount at configured flow rate
 		"""
 
-		return 1
+		return amount / FLOW_RATE
 
 	def _get_pin(self, ingredient):
 		"""Searches pump configuration for pin associated with provided ingredient.
