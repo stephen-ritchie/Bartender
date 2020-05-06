@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<h1>DEBUG</h1>
+<hr>
+<h2>Pumps</h2>
+{% for pump in pumps %}
+<pre>Name:[{{ pump['name'] }}] Pin:[{{ pump['pin'] }}] Value:[{{ pump['value'] }}] <a href="{{ url_for('home.debug', pump=pump['pin']) }}" class="waves-effect waves-light btn">Test</a></pre>
+{% endfor %}
+<hr>
+<h2>Drinks</h2>
+{% endblock %}

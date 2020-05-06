@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 
 FLOW_RATE = 1.27
 
+
 class Bartender:
 	"""
 	"""

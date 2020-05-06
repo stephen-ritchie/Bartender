@@ -10,18 +10,15 @@ def main():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
 
+    # Read pump configuration
     filename = "../bartender/pump_config.json"
-
-    # Read pump config and configure each GPIO pin
     with open(filename, 'r') as f:
-        data = json.loads(f)
-
-    for pump in data.keys():
-        GPIO.setup(data[pump]['pin'], GPIO.OUT, initial=GPIO.HIGH)
+        data = json.load(f)
 
     # Run each pump for a certain amount of time
     wait = 1
     for pump in data.keys():
+        GPIO.setup(data[pump]['pin'], GPIO.OUT, initial=GPIO.HIGH)
         pin = data[pump]['pin']
         print("Testing {} [pin {}] for [{}] second(s)".format(data[pump]['name'], pin, wait))
         GPIO.output(pin, GPIO.LOW)
